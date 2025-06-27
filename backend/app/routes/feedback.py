@@ -5,6 +5,7 @@ from uuid import UUID
 from app import models, schemas, crud
 from app.database import get_db
 from app.utils.auth_utils import get_current_user, manager_required, employee_required
+from sqlalchemy.orm import joinedload
 
 router = APIRouter()
 
@@ -52,3 +53,33 @@ def acknowledge_feedback(
     current_user: models.User = Depends(employee_required)
 ):
     return crud.feedback.acknowledge_feedback(db, feedback_id, current_user.id)
+
+# Get all feedbacks submitted by the manager
+@router.get("/manager/all", response_model=list[schemas.FeedbackOut])
+def get_feedbacks_by_manager(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(manager_required)
+):
+    return db.query(models.Feedback).options(
+        joinedload(models.Feedback.employee)  # ✅ load employee relationship
+    ).filter(
+        models.Feedback.manager_id == current_user.id
+    ).order_by(models.Feedback.created_at.desc()).all()
+
+@router.get("/single/{feedback_id}", response_model=schemas.FeedbackOut)
+def get_feedback_by_id(
+    feedback_id: UUID,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(manager_required)
+):
+    feedback = db.query(models.Feedback).options(
+        joinedload(models.Feedback.employee)
+    ).filter(
+        models.Feedback.id == feedback_id,
+        models.Feedback.manager_id == current_user.id
+    ).first()
+
+    if not feedback:
+        raise HTTPException(status_code=404, detail="Feedback not found")
+
+    return feedback

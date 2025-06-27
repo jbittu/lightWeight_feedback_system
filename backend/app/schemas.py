@@ -39,6 +39,16 @@ class TokenData(BaseModel):
     user_id: Optional[UUID4]
     role: Optional[Role]
 
+# --- Acknowledgement Schema ---
+class AcknowledgementOut(BaseModel):
+    id: UUID4
+    feedback_id: UUID4
+    employee_id: UUID4
+    acknowledged_at: datetime
+
+    class Config:
+        from_attributes = True
+
 # --- Feedback Schemas ---
 class FeedbackBase(BaseModel):
     strengths: Optional[str]
@@ -54,16 +64,8 @@ class FeedbackOut(FeedbackBase):
     employee_id: UUID4
     created_at: datetime
     updated_at: Optional[datetime]
-
-    class Config:
-        from_attributes = True
-
-# --- Acknowledgement Schema ---
-class AcknowledgementOut(BaseModel):
-    id: UUID4
-    feedback_id: UUID4
-    employee_id: UUID4
-    acknowledged_at: datetime
+    acknowledgement: Optional[AcknowledgementOut] = None
+    employee: Optional[UserOut] = None
 
     class Config:
         from_attributes = True
