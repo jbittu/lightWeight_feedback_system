@@ -1,10 +1,10 @@
-# 💬 Lightweight Feedback System
+#  Lightweight Feedback System
 
 A lightweight, role-based feedback management application where **Managers** can provide feedback to their **Employees**, and Employees can view and acknowledge the feedback.
 
 ---
 
-## 📁 Folder Structure
+##  Folder Structure
 
 ```
 lightWeight_feedback_system/
@@ -46,7 +46,7 @@ lightWeight_feedback_system/
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 ### 🔹 Backend
 - **FastAPI** – High-performance Python web framework.
@@ -149,7 +149,7 @@ CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
 ```
 
-#### 🧩 `docker commands`
+####  `docker commands`
 
 ```
 docker build -t feedback-backend .
@@ -161,7 +161,7 @@ docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedba
 
 
 
-## ✅ Summary
+##  Summary
 
 | Component | Stack                 | Run Command                      | URL                              |
 |-----------|-----------------------|----------------------------------|----------------------------------|
@@ -170,7 +170,7 @@ docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedba
 
 ---
 
-## 🔐 Role-Based Access
+##  Role-Based Access
 
 | Role     | Routes                                          | Permissions                       |
 |----------|--------------------------------------------------|-----------------------------------|
@@ -179,7 +179,7 @@ docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedba
 
 ---
 
-## 📡 API Endpoints
+##  API Endpoints
 
 ### Auth
 - `POST /auth/login`
@@ -195,6 +195,6 @@ docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedba
 
 ---
 
-## 📝 License
+##  License
 
 Licensed under the **MIT License** — free to use, share, and modify.
