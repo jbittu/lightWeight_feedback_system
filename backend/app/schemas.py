@@ -1,4 +1,4 @@
-# app/schemas.py
+
 from pydantic import BaseModel, EmailStr, UUID4
 from typing import Optional, List
 from datetime import datetime

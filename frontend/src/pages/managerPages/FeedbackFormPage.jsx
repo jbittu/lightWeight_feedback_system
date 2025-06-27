@@ -42,7 +42,7 @@ const FeedbackFormPage = () => {
 
     try {
       await createFeedback(formData);
-      navigate('/manager/dashboard'); // Redirect to employee list after submission
+      navigate('/manager/dashboard'); 
     } catch (err) {
       setError('Failed to submit feedback');
     } finally {

@@ -61,7 +61,7 @@ def get_feedbacks_by_manager(
     current_user: models.User = Depends(manager_required)
 ):
     return db.query(models.Feedback).options(
-        joinedload(models.Feedback.employee)  # ✅ load employee relationship
+        joinedload(models.Feedback.employee)  
     ).filter(
         models.Feedback.manager_id == current_user.id
     ).order_by(models.Feedback.created_at.desc()).all()

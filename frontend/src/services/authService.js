@@ -1,7 +1,6 @@
-// src/services/authService.js
 import API from "./api";
 
-// Login (used internally)
+// Login 
 export const login = async (email, password) => {
   const data = new URLSearchParams();
   data.append("username", email);

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
 import { jwtDecode } from "jwt-decode";  
 
-import { useAuth } from "../components/context/AuthContext"; 
+import { useAuth } from "../context/AuthContext"; 
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -25,9 +25,9 @@ const handleSubmit = async (e) => {
   setError("");
 
   try {
-    const res = await loginUser(formData);  // ✅ makes request
+    const res = await loginUser(formData);  
     const token = res.access_token;
-    login(token);  // ✅ saves + sets user
+    login(token);  
 
     const decoded = jwtDecode(token);
     console.log("Decoded Token:", decoded);
