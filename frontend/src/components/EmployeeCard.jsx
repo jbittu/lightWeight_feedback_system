@@ -1,4 +1,4 @@
-// src/components/EmployeeCard.jsx
+
 import { Link } from "react-router-dom";
 
 const EmployeeCard = ({ employee }) => {

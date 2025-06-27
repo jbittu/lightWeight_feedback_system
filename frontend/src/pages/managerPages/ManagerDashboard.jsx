@@ -44,7 +44,7 @@ const ManagerDashboard = () => {
   return (
     <div className="p-4">
       <div className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">Manager Dashboard</h2>
+        <h2 className="text-2xl font-semibold mb-2">Dashboard</h2>
         <p className="text-gray-600">Welcome back, {currentUser?.name}</p>
       </div>
 
@@ -55,7 +55,7 @@ const ManagerDashboard = () => {
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Quick Actions */}
+        
         <div className="bg-white p-6 rounded-lg shadow-sm border">
           <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
           <div className="space-y-3">
@@ -82,7 +82,7 @@ const ManagerDashboard = () => {
           </div>
         </div>
 
-        {/* Statistics */}
+        
         <div className="bg-white p-6 rounded-lg shadow-sm border">
           <h3 className="text-lg font-semibold mb-4">Overview</h3>
           <div className="space-y-3">
@@ -98,7 +98,7 @@ const ManagerDashboard = () => {
         </div>
       </div>
 
-      {/* Employee List */}
+      
       <div className="mt-8">
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold">Your Employees</h3>

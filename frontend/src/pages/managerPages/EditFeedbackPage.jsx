@@ -1,4 +1,4 @@
-// src/pages/managerPages/EditFeedbackPage.jsx
+
 import React, { useEffect, useState } from "react";
 import { getFeedbackById, updateFeedback } from "../../services/feedbackService";
 import { useParams, useNavigate } from "react-router-dom";

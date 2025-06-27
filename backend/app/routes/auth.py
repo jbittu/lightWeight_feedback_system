@@ -1,4 +1,4 @@
-# app/routes/auth.py
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
@@ -6,19 +6,19 @@ from app import models, schemas
 from app.database import get_db
 from app.utils.auth_utils import hash_password, verify_password, create_access_token, get_current_user, manager_required
 from uuid import uuid4
-from typing import List  # ✅ ADD THIS
-from app.models import User  # ✅ Make sure User is imported
+from typing import List 
+from app.models import User  
 router = APIRouter()
 
 # User Registration
 @router.post("/register", response_model=schemas.UserOut)
 def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    # Check if email already exists
+    
     existing = db.query(models.User).filter(models.User.email == user.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
 
-    # Validate manager_id based on role
+    
     if user.role == schemas.Role.employee:
         if not user.manager_id:
             raise HTTPException(status_code=422, detail="Employee must have a manager_id")
@@ -44,7 +44,7 @@ def register(user: schemas.UserCreate, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return new_user
 
-# Login - returns JWT token
+
 @router.post("/login", response_model=schemas.Token)
 def login(
     form_data: OAuth2PasswordRequestForm = Depends(),
@@ -57,12 +57,12 @@ def login(
     token = create_access_token({"sub": str(user.id), "role": user.role})
     return {"access_token": token, "token_type": "bearer"}
 
-# Get current logged-in user info
+
 @router.get("/me", response_model=schemas.UserOut)
 def get_me(current_user: models.User = Depends(get_current_user)):
     return current_user
 
-# Get employees by manager (MANAGER ONLY)
+
 @router.get("/employees", response_model=list[schemas.UserOut])
 def get_employees_by_manager(
     db: Session = Depends(get_db),
@@ -74,7 +74,7 @@ def get_employees_by_manager(
     ).all()
     return employees
 
-# Get user by ID
+
 @router.get("/users/{user_id}", response_model=schemas.UserOut)
 def get_user_by_id(
     user_id: str,
@@ -85,14 +85,14 @@ def get_user_by_id(
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     
-    # Only allow viewing if you're the user, their manager, or they're your employee
+    
     if (current_user.id != user.id and 
         current_user.role == schemas.Role.employee and 
         user.manager_id != current_user.id):
         raise HTTPException(status_code=403, detail="Not authorized to view this user")
     
     return user
-# app/routes/auth.py or user.py
+
 @router.get("/managers", response_model=List[schemas.UserOut])
 def get_managers(db: Session = Depends(get_db)):
     return db.query(User).filter(User.role == schemas.Role.manager).all()

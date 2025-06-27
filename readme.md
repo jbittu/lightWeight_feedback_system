@@ -85,73 +85,45 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 ```
 FROM python:3.11-slim
 
-WORKDIR /app
-
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# Set work directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y build-essential libpq-dev && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy application code
 COPY . .
 
+# Expose the port uvicorn will run on
 EXPOSE 8000
 
+# Command to run the app
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-```
-
-#### 🧩 `docker-compose.yml`
 
 ```
-version: "3.9"
 
-services:
-  db:
-    image: postgres:15
-    restart: always
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: feedback_db
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+#### 🧩 `docker commands`
 
-  backend:
-    build: ./backend
-    env_file: ./backend/.env
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-    networks:
-      - feedback-net
+```
+docker build -t feedback-backend .
+docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedback-backend
 
-volumes:
-  postgres_data:
-
-networks:
-  feedback-net:
 ```
 
 ---
 
 ## 🧪 Run the App (Frontend + Backend Setup)
 
-### 🔧 1. Backend Setup
 
-#### Option A: Using Docker 
-
-```
-cd backend
-docker-compose up --build
-```
-
-- Backend running: http://localhost:8000
-- Swagger Docs: http://localhost:8000/docs
-
-#### Option B: Local Python Setup
+#### Option : Local Python Setup
 
 ```
 cd backend

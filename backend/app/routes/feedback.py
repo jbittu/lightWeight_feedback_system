@@ -1,4 +1,4 @@
-# app/routes/feedback.py
+
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from uuid import UUID
@@ -9,7 +9,7 @@ from sqlalchemy.orm import joinedload
 
 router = APIRouter()
 
-# Submit new feedback (MANAGER ONLY)
+
 @router.post("/", response_model=schemas.FeedbackOut)
 def submit_feedback(
     feedback: schemas.FeedbackCreate,
@@ -19,7 +19,7 @@ def submit_feedback(
     return crud.feedback.create_feedback(db, feedback, manager_id=current_user.id)
 
 
-# Get feedback history for an employee (visible to self and manager)
+
 @router.get("/employee/{employee_id}", response_model=list[schemas.FeedbackOut])
 def get_employee_feedback(
     employee_id: UUID,
@@ -31,7 +31,7 @@ def get_employee_feedback(
     return crud.feedback.get_feedback_for_employee(db, employee_id)
 
 
-# Update a feedback (MANAGER ONLY)
+
 @router.patch("/{feedback_id}", response_model=schemas.FeedbackOut)
 def update_feedback(
     feedback_id: UUID,
@@ -45,7 +45,7 @@ def update_feedback(
     return updated
 
 
-# Employee acknowledges feedback
+
 @router.patch("/{feedback_id}/acknowledge", response_model=schemas.AcknowledgementOut)
 def acknowledge_feedback(
     feedback_id: UUID,
@@ -54,7 +54,7 @@ def acknowledge_feedback(
 ):
     return crud.feedback.acknowledge_feedback(db, feedback_id, current_user.id)
 
-# Get all feedbacks submitted by the manager
+
 @router.get("/manager/all", response_model=list[schemas.FeedbackOut])
 def get_feedbacks_by_manager(
     db: Session = Depends(get_db),

@@ -1,4 +1,4 @@
-// src/components/Layout.jsx
+
 import Navbar from "./Navbar";
 
 const Layout = ({ children }) => {

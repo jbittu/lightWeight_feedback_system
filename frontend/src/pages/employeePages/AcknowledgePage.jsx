@@ -35,7 +35,7 @@ const AcknowledgePage = () => {
     
     try {
       await acknowledgeFeedback(feedbackId);
-      // Refresh the feedback list to show updated acknowledgement status
+      
       const currentUser = await getCurrentUser();
       const data = await getFeedbackForEmployee(currentUser.id);
       setFeedbacks(data);

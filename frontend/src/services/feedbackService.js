@@ -1,4 +1,4 @@
-// src/services/feedbackService.js
+
 import API from "./api";
 
 // Create new feedback
@@ -13,13 +13,13 @@ export const getFeedbackForEmployee = async (employeeId) => {
   return response.data;
 };
 
-// ✅ Get all feedbacks submitted by the manager
+//  Get all feedbacks submitted by the manager
 export const getFeedbackByManager = async () => {
   const response = await API.get("/feedback/manager/all");
   return response.data;
 };
 
-// ✅ Get a single feedback by ID (manager view/edit)
+// Get a single feedback by ID (manager view/edit)
 export const getFeedbackById = async (feedbackId) => {
   const response = await API.get(`/feedback/single/${feedbackId}`);
   return response.data;

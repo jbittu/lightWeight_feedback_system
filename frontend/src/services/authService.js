@@ -11,7 +11,7 @@ export const login = async (email, password) => {
   return response.data;
 };
 
-// Login alias for LoginPage
+// Login 
 export const loginUser = async (formData) => {
   return await login(formData.username, formData.password);
 };
@@ -22,13 +22,13 @@ export const registerUser = async (userData) => {
   return res.data;
 };
 
-// Get currently logged-in user
+
 export const getCurrentUser = async () => {
   const response = await API.get("/auth/me");
   return response.data;
 };
 
-// ✅ Get all managers (for employee registration)
+// Get all managers 
 export const getManagers = async () => {
   const response = await API.get("/auth/managers");
   return response.data;

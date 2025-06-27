@@ -1,4 +1,4 @@
-// src/pages/RegisterPage.jsx
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser, getManagers } from "../services/authService";

@@ -1,9 +1,8 @@
 // src/utils/utils.js
-
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 
-// --- Token Management ---
+
 const TOKEN_KEY = "access_token";
 
 export const saveToken = (token) => {
@@ -41,7 +40,7 @@ export function useAuth() {
     if (token) {
       try {
         const decoded = jwtDecode(token);
-        setUser(decoded); // includes: { sub, role, exp }
+        setUser(decoded); 
       } catch (err) {
         console.error("Invalid token", err);
         setUser(null);

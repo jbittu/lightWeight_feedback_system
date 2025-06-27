@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginUser } from "../services/authService";
-import { jwtDecode } from "jwt-decode";  // ✅ fixed import
-// import { useAuth } from "../utils/utils";
-import { useAuth } from "../components/context/AuthContext"; // ✅ correct import
+import { jwtDecode } from "jwt-decode";  
+
+import { useAuth } from "../components/context/AuthContext"; 
 
 const LoginPage = () => {
   const navigate = useNavigate();

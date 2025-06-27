@@ -1,4 +1,4 @@
-// src/components/FeedbackCard.jsx
+
 const FeedbackCard = ({ feedback }) => {
   return (
     <div className="border rounded-xl p-4 shadow">
