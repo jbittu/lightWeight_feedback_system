@@ -120,10 +120,17 @@ docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedba
 
 ---
 
-## 🧪 Run the App (Frontend + Backend Setup)
+##  Run the App (Frontend + Backend Setup)
 
+Clone the Repository
 
-#### Option : Local Python Setup
+```
+git clone https://github.com/your-username/lightWeight_feedback_system.git
+cd lightWeight_feedback_system
+# Replace your-username with your actual GitHub username if applicable.
+```
+
+#### Option : Backend setup
 
 ```
 cd backend
@@ -143,7 +150,7 @@ DATABASE_URL=your url
 ```
 ---
 
-### 💻 2. Frontend Setup
+###  Frontend Setup
 
 ```
 cd frontend
