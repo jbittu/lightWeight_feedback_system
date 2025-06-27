@@ -27,3 +27,6 @@ Thumbs.db
 
 # Uvicorn reload artifacts
 *.pid
+
+# Docker artifacts
+*.yml
