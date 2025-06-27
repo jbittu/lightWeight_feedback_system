@@ -63,63 +63,17 @@ lightWeight_feedback_system/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
-### 1. 📄 Backend Environment Variables
+###   Backend Environment Variables
 
 Create a `.env` file inside the `backend/` directory:
 
 ```
 DATABASE_URL=postgresql+psycopg2://postgres:postgres@db:5432/feedback_db
 SECRET_KEY=your_secret_key
-ALGORITHM=HS256
-ACCESS_TOKEN_EXPIRE_MINUTES=30
-```
-
----
-
-### 2. 🐳 Dockerized Setup
-
-#### 📦 `backend/Dockerfile`
 
 ```
-FROM python:3.11-slim
-
-# Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
-
-# Set work directory
-WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y build-essential libpq-dev && rm -rf /var/lib/apt/lists/*
-
-# Install Python dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy application code
-COPY . .
-
-# Expose the port uvicorn will run on
-EXPOSE 8000
-
-# Command to run the app
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
-
-```
-
-#### 🧩 `docker commands`
-
-```
-docker build -t feedback-backend .
-docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedback-backend
-
-```
-
----
-
 ##  Run the App (Frontend + Backend Setup)
 
 Clone the Repository
@@ -161,6 +115,51 @@ npm run dev
 - Frontend running: http://localhost:3000
 
 ---
+
+
+###   Dockerized Setup
+
+####  `backend/Dockerfile`
+
+```
+FROM python:3.11-slim
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set work directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y build-essential libpq-dev && rm -rf /var/lib/apt/lists/*
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Expose the port uvicorn will run on
+EXPOSE 8000
+
+# Command to run the app
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+
+```
+
+#### 🧩 `docker commands`
+
+```
+docker build -t feedback-backend .
+docker run -d --name feedback-backend --network feedback-net -p 8000:8000 feedback-backend
+
+```
+
+---
+
+
 
 ## ✅ Summary
 
